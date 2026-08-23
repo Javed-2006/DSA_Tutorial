@@ -10,6 +10,9 @@ class Node{
 }
 class List{
     Node head;
+
+    // It doesn't depends on the length of list
+    //0(1)
     public void insertAtBeginning(int item){
         Node newNode = new Node(item);
         
@@ -22,6 +25,8 @@ class List{
         return;
     }
 
+    // Operation: depends on the length of list
+    // 0(n)
     public void insetAtPosition(int item,int position){
         Node newNode=new Node(item);
         if(head==null){
@@ -58,6 +63,8 @@ class List{
         return;
     }
 
+    // Operation: depends on the length of list
+    //0(n)
     public void insertEnd(int item){
         Node newNode=new Node(item);
         if(head==null){
@@ -71,6 +78,56 @@ class List{
         temp.next=newNode;
         return;
     }
+
+    // Operation: doesn't depends on the length of list
+    // 0(1)
+    public void deleteAtFist(){
+        if(head==null){
+            return;
+        }
+        head=head.next;
+    }
+
+    // Opertaion: depends on the length of list
+    // 0(n)
+    public void deleteAtPosition(int position){
+        int index=0;
+
+        if(position==0){
+            head=head.next;
+        }
+         
+        if(position==1){
+            head.next=head.next.next;
+        }
+
+        Node temp=head;
+        while(index!=position-1){
+            temp=temp.next;
+            index++;
+        }
+        temp.next=temp.next.next;
+    }
+
+    // Operation: depends on the length on the list
+    // 0(n)
+    public void deleteAtLast(){
+        if(head==null){
+            return;
+        }
+        if(head.next==null){
+            head=null;
+        }
+
+        Node temp=head;
+        while(temp.next.next!=null){
+            temp=temp.next;
+        }
+        temp.next=null;
+    }
+
+    // Operation: depends on the length of list
+    // 0(n)
     public void printData(){
         Node temp=head;
         if(temp.next==null){
@@ -88,12 +145,16 @@ class List{
 public class LinkedList {
     public static void main(String[] args) {
         List list=new List();
-        list.insertAtBeginning(10);
+        list.insertAtBeginning(40);
         list.insertAtBeginning(20);
-        list.insertEnd(30);
-        list.insertEnd(40);
-        list.insertAtBeginning(50);
-        list.insetAtPosition(60,2);
+        list.insertEnd(50);
+        list.insertEnd(60);
+        list.insertAtBeginning(10);
+        list.insetAtPosition(30,2);
+
+        list.deleteAtFist();
+        list.deleteAtLast();
+        list.deleteAtPosition(2);
         list.printData();
     }
 }
